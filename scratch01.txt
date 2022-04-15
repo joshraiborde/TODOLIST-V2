@@ -1,0 +1,28 @@
+https://www.udemy.com/course/the-complete-web-development-bootcamp/learn/lecture/12385988#questions/10375808
+
+I had the same problem with favicon.ico and just wrote the code below:
+
+app.get('/:paramName',(req,res)=>{
+  const customListName = _.capitalize(req.params.paramName);
+  List.findOne({ name: customListName }, (err, lists) => {
+    if (err) {
+      console.log(err)
+    } else if (!lists) {
+      console.log(`list ${customListName} doesn't exists!`)
+      if (customListName !== 'Favicon.ico'){
+        const list = new List({
+        name: customListName,
+        items: defaultItems
+      })
+      list.save();
+      res.redirect(`/${customListName}`)
+    }
+      
+    } else {
+      res.render("list", { listTitle: lists.name, newListItems: lists.items });
+    }
+  });
+  
+ 
+})
+It worked for me to ignore the favicon.ico list. Just take care if i may changed the names of the variables.
