@@ -7,7 +7,7 @@ const _ = require("lodash");
 require("dotenv").config() 
 
 const app = express();
-// const port = 3000;
+const port = 3000;
 const now = new Date();
 
 const ATLUSER = process.env.USERNAME
@@ -199,11 +199,18 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3000;
-}
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 3000;
+// }
 
-app.listen(port, () => {
-  console.log("Server started on port: " + port + " on " + now.toUTCString());
+// app.listen(port, () => {
+//   console.log("Server started on port: " + port + " on " + now.toUTCString());
+// });
+
+// app.listen(process.env.PORT || port, () => {
+//   console.log("Listening Route. Server is running on Port " + port + " on " + now.toUTCString());
+// });
+app.listen(process.env.PORT || port, () => {
+  console.log("Listening Route. Server is running on Port " + port + " on " + now.toUTCString());
 });
